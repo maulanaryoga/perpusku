@@ -18,7 +18,8 @@ class Book extends Model
     public static function validate($request)
     {
         $request->validate([
-            "book_code" => "required",
+        'book_code' => 'required|unique:books',
+        'title' => 'required'
         ]);
     }
 

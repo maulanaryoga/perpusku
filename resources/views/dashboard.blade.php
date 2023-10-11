@@ -58,16 +58,15 @@
             </thead>
             <tbody>
                 @foreach ($rent_logs as $item)
-                    @if ($item->actual_return_date === null)
-                        <tr>
-                            <td>{{ $item->user->username }}</td>
-                            <td>{{ $item->book->title }}</td>
-                            <td>{{ $item->rent_date }}</td>
-                            <td>{{ $item->return_date }}</td>
-                            <td>{{ $item->actual_return_date }}</td>
-                            <td>{{ $item->jumlah }}</td>
-                        </tr>
-                    @endif
+                    <tr @if ($item->actual_return_date && $item->actual_return_date < $item->return_date) class="table-success" @endif
+                        @if ($item->actual_return_date && $item->actual_return_date > $item->return_date) class="table-danger" @endif>
+                        <td>{{ $item->user->username }}</td>
+                        <td>{{ $item->book->title }}</td>
+                        <td>{{ $item->rent_date }}</td>
+                        <td>{{ $item->return_date }}</td>
+                        <td>{{ $item->actual_return_date }}</td>
+                        <td>{{ $item->jumlah }}</td>
+                    </tr>
                 @endforeach
                 @if (count($rent_logs) == 0)
                     <tr>
